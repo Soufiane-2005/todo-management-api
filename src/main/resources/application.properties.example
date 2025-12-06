@@ -1,0 +1,74 @@
+# ============================================
+# Todo Management API Configuration Template
+# ============================================
+# Copy this file to 'application.properties' and fill in your values
+# OR use environment variables
+
+# ========== Application Settings ==========
+spring.application.name=To-Do
+server.port=${PORT:8080}  # Heroku/Render sets PORT automatically
+
+# ========== Database Configuration ==========
+# Option 1: Use environment variables (recommended)
+spring.datasource.url=${DATABASE_URL:jdbc:mysql://localhost:3306/To_Do}
+spring.datasource.username=${DATABASE_USERNAME:root}
+spring.datasource.password=${DATABASE_PASSWORD:}
+
+# Option 2: Direct MySQL connection (for local development)
+# spring.datasource.url=jdbc:mysql://localhost:3306/To_Do?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+# spring.datasource.username=root
+# spring.datasource.password=your_password_here
+
+# ========== JWT Configuration ==========
+# IMPORTANT: Generate a strong secret key (min 256-bit)
+jwt.secret_key=${JWT_SECRET:}
+jwt.expiration_time=3600000  # 1 hour in milliseconds
+
+# ========== JPA/Hibernate Configuration ==========
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+# ========== Flyway Configuration ==========
+spring.flyway.enabled=true
+spring.flyway.locations=classpath:db/migration
+spring.flyway.baseline-on-migrate=true
+spring.flyway.validate-on-migrate=true
+spring.flyway.baseline-version=0
+spring.flyway.clean-disabled=true  
+# Safety: prevent accidental table drops
+
+# ========== Logging Configuration ==========
+logging.level.com.example.To_Do=DEBUG
+logging.level.org.springframework.security=INFO
+logging.level.org.flywaydb=INFO
+
+# ========== Security Configuration ==========
+# CORS settings (adjust for your frontend)
+# spring.mvc.cors.allowed-origins=http://localhost:3000
+# spring.mvc.cors.allowed-methods=GET,POST,PUT,DELETE,OPTIONS
+# spring.mvc.cors.allowed-headers=*
+
+# ============================================
+# Environment Variables Reference:
+# ============================================
+# Required:
+#   DATABASE_URL      - MySQL connection URL
+#   DATABASE_USERNAME - Database username
+#   DATABASE_PASSWORD - Database password
+#   JWT_SECRET        - Secret key for JWT tokens
+#
+# Optional:
+#   PORT              - Server port (default: 8080)
+#
+# How to set locally:
+#   Windows: set DATABASE_PASSWORD=yourpassword
+#   Mac/Linux: export DATABASE_PASSWORD=yourpassword
+#
+# Or create .env file with:
+#   DATABASE_URL=jdbc:mysql://localhost:3306/To_Do
+#   DATABASE_USERNAME=root
+#   DATABASE_PASSWORD=yourpassword
+#   JWT_SECRET=your-256-bit-secret-key-here
+# ============================================
